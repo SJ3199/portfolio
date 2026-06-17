@@ -1,0 +1,86 @@
+---
+import Button from "../components/ui/Button.astro";
+import { siteConfig } from "@/config/site";
+import HeroCard from "@/components/home/HeroCard.astro";
+import Layout from "@/layouts/Layout.astro";
+import SocialCard from "@/components/cards/SocialCard.astro";
+import AnimatedText from "@/components/ui/AnimatedText.astro";
+import Explore from "@/components/sections/Explore.astro";
+import GallerySection from "@/components/sections/GallerySection.astro";
+---
+
+<Layout
+title="作品集 | Portfolio"
+description="个人作品展示 — 包含直播画面设计、海报设计、抖音产品图、店铺装修、详情页等作品。"
+keywords="作品集, 设计, 直播设计, 海报, 抖音, 电商设计"
+>
+  <div
+    class="relative site-container z-20 w-full mx-auto flex items-center xl:px-16 2xl:px-24" style="min-height: calc(100vh - 80px);"
+  >
+    <div class="relative w-full px-4 md:px-0 flex flex-col items-center justify-between md:flex-row py-8 md:py-0">
+      <div class="relative w-full md:max-w-[420px] md:w-1/2 text-center sm:text-left sm:-mt-8">
+        <!-- Title -->
+        <h1 class="mb-4">
+          <AnimatedText
+            content="Hi, I'm Sam"
+            delay={0.1}
+            duration={0.5}
+            stagger={0.08}
+            class="text-6xl sm:text-7xl lg:text-8xl font-black font-sans leading-tight whitespace-nowrap text-pri"
+          />
+        </h1>
+
+        <!-- Description -->
+        <div class="mb-2" data-i18n-html="hero-desc-1">
+          <AnimatedText
+            content="专注于电商视觉设计/直播画面设计和品牌视觉落地。"
+            delay={0.3}
+            duration={0.5}
+            stagger={0.015}
+            class="text-base text-neutral-700 dark:text-neutral-300"
+          />
+        </div>
+
+        <div class="mb-4" data-i18n-html="hero-desc-2">
+          <AnimatedText
+            content="擅长将品牌理念转化为视觉语言/打造有吸引力的电商视觉体验。"
+            delay={0.5}
+            duration={0.5}
+            stagger={0.015}
+            class="text-base text-neutral-700 dark:text-neutral-300"
+          />
+        </div>
+
+        <!-- Social Cards -->
+        <div
+          class="social mt-8 mb-8"
+          data-aos="fade-up-sm"
+          data-aos-delay="800"
+          data-aos-duration="600"
+          data-aos-once="true"
+        >
+          <SocialCard displaySocialIds={[9, 2]}/>
+        </div>
+      </div>
+
+      <!-- HeroCard -->
+      <div
+        class="relative justify-end w-full mt-16 md:flex md:pl-10 md:w-[37.5%] md:mt-0 md:translate-y-4 xl:translate-y-0"
+        data-aos="fade-left-sm"
+        data-aos-delay="300"
+        data-aos-duration="800"
+        data-aos-once="true"
+      >
+        <HeroCard
+          imageUrl="/assets/home/gradientshub.jpg"
+          title="Portfolio"
+          link="#gallery"
+        />
+      </div>
+    </div>
+  </div>
+
+  <!-- Gallery Section -->
+  <GallerySection />
+
+</Layout>

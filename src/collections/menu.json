@@ -1,0 +1,17 @@
+[
+	{
+		"nameZh": "视觉作品",
+		"nameEn": "Visual Works",
+		"url": "/"
+	},
+	{
+		"nameZh": "个人介绍",
+		"nameEn": "Introduction",
+		"url": "/intro"
+	},
+	{
+		"nameZh": "AI项目",
+		"nameEn": "AI Projects",
+		"url": "/about"
+	}
+]

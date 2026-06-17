@@ -1,0 +1,23 @@
+[
+	{
+		"id": 9,
+		"name": "WeChat",
+		"username": "sam",
+		"image": "/assets/social/social-wechat.png",
+		"url": "#wechat"
+	},
+	{
+		"id": 2,
+		"name": "抖音",
+		"username": "sam",
+		"image": "/assets/social/social-douyin.png",
+		"url": "#douyin"
+	},
+	{
+		"id": 12,
+		"name": "Facebook",
+		"isShow": false,
+		"image": "/assets/social/social-facebook.png",
+		"url": "#facebook"
+	}
+]

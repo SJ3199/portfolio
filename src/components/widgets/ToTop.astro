@@ -1,0 +1,25 @@
+<!-- Back to top button (rendered in floating panel) -->
+
+<style>
+</style>
+
+<script>
+  function initBackToTop() {
+    const btn = document.getElementById('back-to-top-btn');
+    if (!btn) return;
+    function update() {
+      if (window.scrollY > 300) btn.classList.add('visible');
+      else btn.classList.remove('visible');
+    }
+    window.addEventListener('scroll', update, { passive: true });
+    btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+    update();
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initBackToTop);
+  } else {
+    initBackToTop();
+  }
+  document.addEventListener('astro:page-load', initBackToTop);
+</script>
+

@@ -1,0 +1,389 @@
+---
+import galleryItems from "@/collections/gallery.json";
+import SectionHeader from "@/components/elements/SectionHeader.astro";
+
+const categoryMap: Record<string, string> = {
+  "live-stream": "直播画面",
+  "posters": "海报设计",
+  "detail-pages": "长图",
+  "material-design": "物料设计",
+  "brand-design": "品牌设计",
+  "douyin-store": "抖音店铺",
+  "douyin-products": "抖音产品图",
+};
+
+const categories = Object.keys(categoryMap);
+const firstActiveCat = categories.find(cat => galleryItems.some(item => item.category === cat)) || categories[0];
+
+const brandItems = galleryItems.filter(item => item.category === 'brand-design');
+const otherItems = galleryItems.filter(item => item.category !== 'brand-design');
+
+// Reorder for CSS columns masonry: visual row-major (1 2 3 / 4 5 6) requires column-major DOM.
+// CSS columns fills top→bottom per column, so DOM [0,3,6,1,4,7,2,5,8] → visual [0,1,2 / 3,4,5 / 6,7,8]
+// Keep originalIndex so data-index stays correct for detail modal lookups.
+function reorderForColumns(items, cols: number) {
+  const rows = Math.ceil(items.length / cols);
+  const pairs = items.map((item, i) => ({ item, originalIndex: i }));
+  const result = new Array(items.length);
+  for (let i = 0; i < items.length; i++) {
+    const row = Math.floor(i / cols);
+    const col = i % cols;
+    result[col * rows + row] = pairs[i];
+  }
+  return result;
+}
+const orderedItems = reorderForColumns(otherItems, 3);
+---
+
+<section class="py-16 md:py-16 md:pb-12" id="gallery">
+  <div class="site-container space-y-6 md:space-y-8">
+    <SectionHeader
+      title="作品集 ↓"
+      description="以下是我的设计作品展示，点击进入详情。"
+      i18nTitle="gallery-title"
+      i18nDesc="gallery-desc"
+    />
+
+    <!-- Filter Tabs -->
+    <div class="filter-wrapper" data-aos="fade-up-sm" data-aos-duration="600" data-aos-once="true">
+      <div class="filter-list flex flex-wrap gap-3 justify-center">
+        {categories.map((cat) => (
+          <button class={`filter-tag${cat === firstActiveCat ? ' active' : ''}`} data-filter={cat} data-i18n-cat={cat}>
+            {categoryMap[cat] || cat}
+          </button>
+        ))}
+      </div>
+    </div>
+
+    <!-- Gallery Grid: Pinterest-style CSS columns masonry -->
+    <!-- CSS columns fills left→right naturally, no JS reorder needed -->
+    <div
+      class="gallery-grid"
+      id="galleryGrid"
+    >
+      {orderedItems.map(({ item, originalIndex }) => (
+        <article
+          class="gallery-item gallery-grid-item group cursor-pointer"
+          data-category={item.category}
+          data-index={originalIndex}
+        >
+          <div class={`relative overflow-hidden rounded-3xl transition-all duration-300${item.image.endsWith('.png') ? '' : ' border border-primary/10 dark:border-primary/20 bg-neutral-100 dark:bg-neutral-800'}`}>
+              <img
+                src={item.image}
+                alt={item.title}
+                class="w-full h-auto block"
+                loading="eager"
+                decoding="async"
+                width="600"
+                height="400"
+                onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22300%22><rect fill=%22%23e2e8f0%22 width=%22400%22 height=%22300%22/><text x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%2394a3b8%22 font-size=%2216%22 font-family=%22sans-serif%22>待添加图片</text></svg>'" />
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <div id="galleryEmpty" class="hidden text-center py-20">
+      <div class="text-6xl mb-4">📁</div>
+      <p class="text-neutral-500 dark:text-neutral-400 text-lg" data-i18n="gallery-empty">该分类暂无作品</p>
+    </div>
+
+    <!-- Brand Design: separate section, ALWAYS visible below the grid -->
+    {brandItems.length > 0 && (
+      <div class="brand-section" id="brandSection">
+        <div class="brand-grid flex flex-col md:flex-row gap-4 md:gap-6">
+          <!-- Left: first brand image, 50% width -->
+          <div class="brand-main w-full md:w-1/2 flex-shrink-0">
+            <article class="gallery-item group cursor-pointer" data-category="brand-design" data-index="brand-0">
+              <div class={`relative overflow-hidden rounded-3xl transition-all duration-300${brandItems[0].image.endsWith('.png') ? '' : ' border border-primary/10 dark:border-primary/20 bg-neutral-100 dark:bg-neutral-800'}`}>
+                <img src={brandItems[0].image} alt={brandItems[0].title} class="w-full h-auto block" loading="eager" decoding="async" width="720" height="480" />
+              </div>
+            </article>
+          </div>
+          <!-- Right: remaining brand images, 2-column grid -->
+          {brandItems.length > 1 && (
+            <div class="brand-rest flex-1 grid grid-cols-2 gap-4 md:gap-6 content-start">
+              {brandItems.slice(1).map((item, i) => (
+                <article class="gallery-item group cursor-pointer" data-category="brand-design" data-index={`brand-${i + 1}`}>
+                  <div class={`relative overflow-hidden rounded-3xl transition-all duration-300${item.image.endsWith('.png') ? '' : ' border border-primary/10 dark:border-primary/20 bg-neutral-100 dark:bg-neutral-800'}`}>
+                    <img src={item.image} alt={item.title} class="w-full h-auto block" loading="eager" decoding="async" width="480" height="360" />
+                  </div>
+                </article>
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+    )}
+  </div>
+</section>
+
+<!-- Detail Modal -->
+<div id="detailModal" class="fixed inset-0 z-[100] hidden bg-black/96 backdrop-blur-sm flex-col">
+  <div class="absolute top-0 left-0 right-0 z-50 flex items-center justify-between px-4 md:px-8 py-3 bg-gradient-to-b from-black/80 to-transparent">
+    <span id="detailCounter" class="text-white/60 text-sm"></span>
+    <button onclick="closeDetail()" class="w-8 h-8 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 text-white/80 hover:text-white transition-all text-lg leading-none">✕</button>
+  </div>
+  <button id="detailPrev" class="absolute left-2 md:left-6 top-1/2 -translate-y-1/2 z-50 w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 text-white hover:scale-110 transition-all duration-200" title="上一张">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+  </button>
+  <button id="detailNext" class="absolute right-2 md:right-6 top-1/2 -translate-y-1/2 z-50 w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 text-white hover:scale-110 transition-all duration-200" title="下一张">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+  </button>
+  <div id="detailBody" class="flex flex-col md:flex-row w-full max-w-[1080px] mx-auto flex-1 min-h-0">
+    <div id="detailImageArea" class="flex-1 min-h-0">
+      <div class="flex items-start justify-center p-4 md:p-6 h-full">
+        <img id="detailImg" class="w-full rounded-lg" src="" alt="" />
+      </div>
+    </div>
+    <div class="w-full md:w-[340px] lg:w-[380px] bg-neutral-900/90 backdrop-blur-md border-l border-white/10 overflow-y-auto flex-shrink-0">
+      <div class="p-5 md:p-7">
+        <span id="detailCat" class="inline-flex items-center rounded-full bg-primary/30 px-3 py-1 text-xs font-medium text-primary-light border border-primary/30 mb-4"></span>
+        <h2 id="detailTitle" class="text-2xl font-brand text-white mb-3"></h2>
+        <p id="detailDesc" class="text-neutral-300 text-sm leading-relaxed mb-4"></p>
+        <div class="border-t border-white/10 my-5"></div>
+        <div id="detailFields" class="space-y-4"></div>
+        <div id="detailContent" class="mt-5 text-neutral-400 text-sm leading-relaxed space-y-3 whitespace-pre-line"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .filter-tag {
+    border-radius: 32px;
+    background-color: #fff;
+    padding: 10px 24px;
+    font-size: 14px;
+    border: 1px solid #d0d0d0;
+    line-height: 1;
+    letter-spacing: 0.25px;
+    color: #101010;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.35s cubic-bezier(0.075, 0.82, 0.165, 1);
+  }
+  .filter-tag:hover { background-color: rgba(10, 10, 10, 0.08); }
+  .filter-tag.active { font-weight: 500; background: #0a0a0a; color: #f4f3f0; }
+  html.dark .filter-tag { background-color: #19191b; color: #d6d5d4; border: 1px solid #696765; }
+  html.dark .filter-tag:hover { background-color: rgba(243, 244, 247, 0.08); }
+  html.dark .filter-tag.active { background: #f4f3f0; color: #19191b; font-weight: 500; }
+
+  /* Pinterest-style masonry via CSS columns */
+  .gallery-grid {
+    column-count: 1;
+    column-gap: 1rem;
+  }
+  @media (min-width: 640px) {
+    .gallery-grid { column-count: 2; column-gap: 1.5rem; }
+  }
+  @media (min-width: 1024px) {
+    .gallery-grid { column-count: 3; column-gap: 1.5rem; }
+  }
+  .gallery-item { animation: fadeInUp 0.5s ease forwards; opacity: 0; }
+  /* Brand section items: always fully visible, no fade-in */
+  .brand-section .gallery-item { animation: none; opacity: 1; }
+  .gallery-grid-item {
+    break-inside: avoid;
+    margin-bottom: 1rem;
+  }
+  @media (min-width: 640px) {
+    .gallery-grid-item { margin-bottom: 1.5rem; }
+  }
+  @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+  #detailModal.show { display: flex; }
+
+  #detailModal .overflow-y-auto::-webkit-scrollbar { width: 6px; }
+  #detailModal .overflow-y-auto::-webkit-scrollbar-track { background: transparent; }
+  #detailModal .overflow-y-auto::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 4px; }
+
+  /* Scroll mode: for long detail pages, image starts from top */
+  #detailImageArea.scroll-mode { overflow-y: auto; }
+  #detailImageArea.scroll-mode > div { align-items: flex-start !important; height: auto; }
+  #detailImageArea.scroll-mode img { max-height: none; width: 100%; }
+
+  /* Fit mode: for regular images that fit viewport, centered left */
+  #detailImageArea.fit-mode { overflow-y: hidden; }
+  #detailImageArea.fit-mode > div { align-items: center !important; height: 100%; }
+  #detailImageArea.fit-mode img { max-height: 85vh; object-fit: contain; width: auto; max-width: 100%; }
+</style>
+
+<div id="galleryDataStore" data-json={JSON.stringify(galleryItems.map(item => ({...item, categoryName: categoryMap[item.category] || item.categoryName})))} style="display:none"></div>
+
+<script>
+  const galleryData = JSON.parse(document.getElementById('galleryDataStore').getAttribute('data-json'));
+  let currentDetailIndex = -1;
+  let currentFilter = document.querySelector('.filter-tag.active')?.dataset.filter || 'live-stream';
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const filterBtns = document.querySelectorAll('.filter-tag');
+    const grid = document.getElementById('galleryGrid');
+    const gridItems = grid.querySelectorAll('.gallery-grid-item');
+    const brandSection = document.getElementById('brandSection');
+    const emptyState = document.getElementById('galleryEmpty');
+
+    // CSS columns fills left→right naturally, no JS reorder needed.
+    // Brand section only visible when brand-design tab is selected.
+
+    function applyFilter(filter) {
+      currentFilter = filter;
+
+      // Update description text: only live-stream has click-to-detail
+      const descEl = document.querySelector('[data-i18n-desc-holder]');
+      if (descEl) {
+        const lang = (localStorage.getItem('lang') || 'zh');
+        const key = filter === 'live-stream' ? 'gallery-desc' : 'gallery-desc-no-click';
+        const texts = {
+          'zh': { 'gallery-desc': '以下是我的设计作品展示，点击进入详情。', 'gallery-desc-no-click': '以下是我的设计作品展示。' },
+          'en': { 'gallery-desc': 'Here are my design works. Click to view details.', 'gallery-desc-no-click': 'Here are my design works.' }
+        };
+        if (texts[lang] && texts[lang][key]) {
+          descEl.textContent = texts[lang][key];
+        }
+      }
+
+      // Brand section visibility
+      if (brandSection) {
+        brandSection.style.display = (filter === 'brand-design') ? '' : 'none';
+      }
+
+      if (filter === 'brand-design') {
+        gridItems.forEach((item) => { item.style.display = 'none'; });
+        emptyState.classList.add('hidden');
+        return;
+      }
+
+      let count = 0;
+      gridItems.forEach((item, i) => {
+        if (item.dataset.category === filter) {
+          item.style.display = '';
+          item.style.animationDelay = `${count * 0.02}s`;
+          count++;
+        } else {
+          item.style.display = 'none';
+        }
+      });
+
+      emptyState.classList.toggle('hidden', count > 0);
+    }
+
+    // Initial filter application
+    applyFilter(currentFilter);
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        applyFilter(btn.dataset.filter);
+      });
+    });
+
+    // === Click to open detail (live-stream only) ===
+    gridItems.forEach(item => {
+      if (item.dataset.category === 'live-stream') {
+        item.addEventListener('click', () => {
+          const idx = parseInt(item.dataset.index);
+          openDetail(idx);
+        });
+        item.style.cursor = 'pointer';
+      } else {
+        item.style.cursor = 'default';
+      }
+    });
+
+    // === Detail Modal ===
+    document.getElementById('detailPrev').addEventListener('click', (e) => { e.stopPropagation(); navigateDetail(-1); });
+    document.getElementById('detailNext').addEventListener('click', (e) => { e.stopPropagation(); navigateDetail(1); });
+    document.getElementById('detailModal').addEventListener('click', () => { closeDetail(); });
+
+    document.addEventListener('keydown', (e) => {
+      const modal = document.getElementById('detailModal');
+      if (!modal.classList.contains('show')) return;
+      if (e.key === 'Escape') { closeDetail(); }
+      if (e.key === 'ArrowLeft') { navigateDetail(-1); }
+      if (e.key === 'ArrowRight') { navigateDetail(1); }
+    });
+  });
+
+  function openDetail(index) {
+    currentDetailIndex = index;
+    const data = galleryData[index];
+    if (!data) return;
+
+    document.getElementById('detailImg').src = data.image;
+    document.getElementById('detailTitle').textContent = data.title;
+    document.getElementById('detailDesc').textContent = data.description;
+    document.getElementById('detailCat').textContent = data.categoryName;
+    document.getElementById('detailContent').textContent = data.details || '';
+    document.getElementById('detailCounter').textContent = `${index + 1} / ${galleryData.length}`;
+
+    document.getElementById('detailFields').innerHTML = [
+      { label: '项目类型', value: data.categoryName },
+      { label: '项目名称', value: data.title },
+      { label: '项目描述', value: data.description },
+    ].map(f => `<div><span class="text-xs text-neutral-500 uppercase tracking-wider">${f.label}</span><p class="text-sm text-neutral-200 mt-1">${f.value}</p></div>`).join('');
+
+    document.getElementById('detailModal').classList.add('show');
+    document.body.style.overflow = 'hidden';
+
+    const imgArea = document.getElementById('detailImageArea');
+    const body = document.getElementById('detailBody');
+    if (data.category === 'detail-pages') {
+      imgArea.classList.add('scroll-mode');
+      imgArea.classList.remove('fit-mode');
+      body.style.maxWidth = '1080px';
+    } else {
+      imgArea.classList.add('fit-mode');
+      imgArea.classList.remove('scroll-mode');
+      body.style.maxWidth = 'none';
+    }
+
+    updateArrows();
+  }
+
+  function navigateDetail(dir) {
+    // Only navigate through grid items (not brand items)
+    const visibleItems = Array.from(document.querySelectorAll('#galleryGrid .gallery-item')).filter(el => {
+      return window.getComputedStyle(el).display !== 'none';
+    });
+    // Also check parent isn't hidden
+    const trulyVisible = visibleItems.filter(el => {
+      let p = el.parentElement;
+      while (p && p !== document.body) {
+        if (window.getComputedStyle(p).display === 'none') return false;
+        p = p.parentElement;
+      }
+      return true;
+    });
+    const currentEl = trulyVisible.find(el => parseInt(el.dataset.index) === currentDetailIndex);
+    const currentPos = trulyVisible.indexOf(currentEl);
+    const newPos = currentPos + dir;
+    if (newPos < 0 || newPos >= trulyVisible.length) return;
+    const newIdx = parseInt(trulyVisible[newPos].dataset.index);
+    openDetail(newIdx);
+  }
+
+  function updateArrows() {
+    const allItems = Array.from(document.querySelectorAll('#galleryGrid .gallery-item'));
+    const trulyVisible = allItems.filter(el => {
+      if (window.getComputedStyle(el).display === 'none') return false;
+      let p = el.parentElement;
+      while (p && p !== document.body) {
+        if (window.getComputedStyle(p).display === 'none') return false;
+        p = p.parentElement;
+      }
+      return true;
+    });
+    const currentEl = trulyVisible.find(el => parseInt(el.dataset.index) === currentDetailIndex);
+    const pos = trulyVisible.indexOf(currentEl);
+    document.getElementById('detailPrev').style.opacity = pos <= 0 ? '0.3' : '1';
+    document.getElementById('detailNext').style.opacity = pos >= trulyVisible.length - 1 ? '0.3' : '1';
+  }
+
+  function closeDetail() {
+    document.getElementById('detailModal').classList.remove('show');
+    document.body.style.overflow = '';
+    currentDetailIndex = -1;
+  }
+  window.closeDetail = closeDetail;
+</script>

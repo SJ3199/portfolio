@@ -1,0 +1,189 @@
+---
+import Meta from './Meta.astro';
+import TopBg from "@/components/ui/TopBg.astro";
+import Footer from "@/components/sections/Footer.astro";
+import Header from "@/components/sections/Header.astro";
+import TrackGa from "@/components/widgets/TrackGa.astro";
+interface Props {
+	title?: string | undefined;
+	description?: string | undefined;
+	keywords?: string | undefined;
+}
+
+const {
+	title,
+	description,
+	keywords
+} = Astro.props;
+
+
+import "../styles/global.css";
+import "aos/dist/aos.css";
+import "../styles/aos-custom.css";
+import '../styles/article.css';
+import '../styles/article-enhancements.css';
+---
+
+<html lang="">
+  <head>
+    <meta charset="UTF-8" />
+    <Meta
+      title = {title}
+      description = {description}
+      keywords = {keywords}
+    />
+    <TrackGa />
+    <!-- Used to add dark mode right away, adding here prevents any flicker -->
+    <!-- Default: dark mode. Only switch to light if explicitly set to 'false' -->
+    <script is:inline>
+      if (typeof Storage !== 'undefined') {
+        var dm = localStorage.getItem('dark_mode');
+        if (dm === null || dm === 'true') {
+          document.documentElement.classList.add('dark');
+        }
+      } else {
+        document.documentElement.classList.add('dark');
+      }
+    </script>
+    <!-- Language preference -->
+    <script is:inline>
+      if (typeof Storage !== 'undefined') {
+        var lang = localStorage.getItem('lang');
+        if (!lang) { localStorage.setItem('lang', 'zh'); }
+      }
+    </script>
+
+    <script is:inline src="/assets/js/aos.js"></script>
+    <link rel="icon" type="image/x-icon" href="/favicon.png" />
+  </head>
+  <body class="antialiased bg-bg-primary dark:bg-bg-primary-dark max-w-full overflow-x-hidden">
+    <TopBg />
+    <Header />
+    <slot />
+    <Footer />
+    <script is:inline src="/assets/js/i18n.js?v=10"></script>
+    <script is:inline>
+      // Header sticky, AOS init, dark mode, mobile menu
+      (function(){
+      var aosInit = false;
+      var headerElement = null;
+      const stickyClassesContainer = ["shadow-[0px_1px_4px_0_rgba(25,33,61,0.06)]","rounded-[20px]","bg-[#ffffff]/65","border-[#ffffff]/65","dark:border-neutral-600/40","dark:bg-neutral-900/60","backdrop-blur-2xl","backdrop-brightness-120"];
+      const unstickyClassesContainer = ["shadow-none","border-transparent","rounded-none","bg-transparent"];
+      const stickyClasses = [];
+      const unstickyClasses = [];
+      
+      function initAOS() {
+        if (typeof AOS !== 'undefined' && !aosInit) {
+          AOS.init({duration:400,easing:'ease-out-cubic',once:true,offset:20,delay:0});
+          aosInit = true;
+        }
+      }
+      
+      document.addEventListener("DOMContentLoaded", function() {
+        headerElement = document.getElementById("header");
+        
+        // Apply dark mode from local storage
+        if (localStorage.getItem("dark_mode") && localStorage.getItem("dark_mode") === "true") {
+          window.darkMode = true;
+          showNight();
+        } else {
+          window.darkMode = false;
+          showDay();
+        }
+        
+        // Sticky header
+        window.addEventListener("scroll", function() {
+          if (headerElement) {
+            if (window.scrollY > 48) {
+              headerElement.firstElementChild.classList.add.apply(headerElement.firstElementChild.classList, stickyClassesContainer);
+              headerElement.firstElementChild.classList.remove.apply(headerElement.firstElementChild.classList, unstickyClassesContainer);
+              headerElement.classList.add.apply(headerElement.classList, stickyClasses);
+            } else {
+              headerElement.firstElementChild.classList.remove.apply(headerElement.firstElementChild.classList, stickyClassesContainer);
+              headerElement.firstElementChild.classList.add.apply(headerElement.firstElementChild.classList, unstickyClassesContainer);
+              headerElement.classList.remove.apply(headerElement.classList, stickyClasses);
+            }
+          }
+        });
+        
+        // Menu active state
+        var menuItems = document.querySelectorAll("#menu a");
+        for (var i = 0; i < menuItems.length; i++) {
+          if (menuItems[i].pathname === window.location.pathname) {
+            menuItems[i].classList.add("text-neutral-900", "dark:text-white", "active");
+          }
+        }
+        
+        // Mobile menu
+        var openBtn = document.getElementById("openMenu");
+        var closeBtn = document.getElementById("closeMenu");
+        if (openBtn) {
+          openBtn.addEventListener("click", function() {
+            document.getElementById("openMenu").classList.add("hidden");
+            document.getElementById("closeMenu").classList.remove("hidden");
+            document.getElementById("menu").classList.remove("hidden");
+            document.getElementById("mobileMenuBackground").classList.add("opacity-0");
+            document.getElementById("mobileMenuBackground").classList.remove("hidden");
+            setTimeout(function() {
+              document.getElementById("mobileMenuBackground").classList.remove("opacity-0");
+            }, 1);
+          });
+        }
+        if (closeBtn) {
+          closeBtn.addEventListener("click", function() {
+            document.getElementById("closeMenu").classList.add("hidden");
+            document.getElementById("openMenu").classList.remove("hidden");
+            document.getElementById("menu").classList.add("hidden");
+            document.getElementById("mobileMenuBackground").classList.add("hidden");
+          });
+        }
+        
+        // Dark toggle
+        var dt = document.getElementById("darkToggle");
+        if (dt) {
+          dt.addEventListener("click", function() {
+            document.documentElement.classList.add("duration-300");
+            if (document.documentElement.classList.contains("dark")) {
+              localStorage.setItem("dark_mode", 'false');
+              showDay(true);
+            } else {
+              localStorage.setItem("dark_mode", 'true');
+              showNight(true);
+            }
+          });
+        }
+        
+        // Init AOS when available
+        if (typeof AOS !== 'undefined') { initAOS(); }
+        else { var check = setInterval(function() { if (typeof AOS !== 'undefined') { initAOS(); clearInterval(check); } }, 100); }
+      });
+      
+      function showDay(animate) {
+        var sun = document.getElementById("sun");
+        var moon = document.getElementById("moon");
+        if(!sun||!moon) return;
+        sun.classList.remove("setting"); moon.classList.remove("rising");
+        var t = 0;
+        if (animate) { t = 500; moon.classList.add("setting"); }
+        setTimeout(function() {
+          moon.classList.add("hidden"); sun.classList.remove("hidden");
+          if (animate) { document.documentElement.classList.remove("dark"); sun.classList.add("rising"); }
+        }, t);
+      }
+      function showNight(animate) {
+        var sun = document.getElementById("sun");
+        var moon = document.getElementById("moon");
+        if(!sun||!moon) return;
+        moon.classList.remove("setting"); sun.classList.remove("rising");
+        var t = 0;
+        if (animate) { t = 500; sun.classList.add("setting"); }
+        setTimeout(function() {
+          sun.classList.add("hidden"); moon.classList.remove("hidden");
+          if (animate) { document.documentElement.classList.add("dark"); moon.classList.add("rising"); }
+        }, t);
+      }
+      })();
+    </script>
+    <!-- BUILD: stable-prod-v4 -->
+  </body>
+</html>

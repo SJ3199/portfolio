@@ -1,0 +1,170 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { siteConfig } from "@/config/site.js";
+import { ArrowUpRight, Mail, Palette, Monitor, Smartphone, Zap, Globe } from "@lucide/astro";
+import Button from "@/components/ui/Button.astro";
+
+const experiences = [
+  {
+    company: "柒抖鑫（重庆）网络科技有限公司",
+    role: "视觉设计师",
+    period: "2023.04 — 至今",
+    dept: "设计 / 战略发展部",
+    _cKey: "exp1-company",
+    _rKey: "exp1-role",
+    _pKey: "exp1-period",
+    _dKey: "exp1-dept",
+    _hlKeys: ["exp1-hl1","exp1-hl2","exp1-hl3","exp1-hl4","exp1-hl5","exp1-hl6"],
+    highlights: [
+      "负责直播界面视觉设计与品牌规范把控，打造主题包装、字幕、转场等元素，提升直播吸引力",
+      "参与直播策划，协同团队输出专业美工方案与优化建议，保障设计贴合业务目标",
+      "设计直播海报、封面及推广物料，把控质量，精准传递信息、提升引流效果",
+      "直播期间监看画面、处理故障，配合导播提供实时视觉执行支持",
+      "熟练操作直播平台与软件，协同多岗位协作，提供技术支持，保障画面高质量输出",
+      "跟进行业趋势与新技术，持续优化能力，输出创新设计方案"
+    ]
+  },
+  {
+    company: "杭州云策文化创意有限公司",
+    role: "视觉设计师",
+    period: "2018.05 — 2022.07",
+    dept: "设计部",
+    _cKey: "exp2-company",
+    _rKey: "exp2-role",
+    _pKey: "exp2-period",
+    _dKey: "exp2-dept",
+    _hlKeys: ["exp2-hl1","exp2-hl2","exp2-hl3","exp2-hl4","exp2-hl5","exp2-hl6"],
+    highlights: [
+      "统筹设计团队日常管理，负责需求分配、审图把控，完善企业视觉规范，赋能团队成长",
+      "全流程主导项目，从需求沟通、排期到上线落地，严格把控节点与交付质量",
+      "牵头京东 S 级大促及日常活动视觉设计，对接需求方，优化沟通效率，输出高转化创意方案",
+      "负责大型活动前期创意策划与框架搭建，主导方案迭代，明确设计方向",
+      "个人月均业绩 3W，带领团队完成京东 618、双 11 等全年度 S 级大促，统筹全流程节点，同时以主设计师身份参与创意执行",
+      "具备成熟团队管理经验，搭建标准化流程，推动团队设计能力提升。拥有成熟商业设计思维与行业洞察力，深耕电商视觉，精准把握市场与用户心理"
+    ]
+  }
+];
+---
+
+<Layout title="个人介绍 | Sam">
+  <div class="relative site-container mx-auto my-8 px-7 lg:px-0">
+    <main class="relative max-w-3xl mx-auto">
+
+      <!-- Header -->
+      <div data-aos="fade-up-xs" data-aos-duration="500" data-aos-once="true">
+        <h2 class="text-2xl font-sans font-bold tracking-tight sm:text-3xl lg:text-4xl" data-i18n="intro-title">关于我</h2>
+        <div class="w-full border-b-1 border-dashed border-b-gray-200 dark:border-b-neutral-700 mt-4 mb-8"></div>
+      </div>
+
+      <!-- Personal Info -->
+      <div class="flex items-center gap-4 mb-6" data-aos="fade-up-xs" data-aos-delay="100" data-aos-duration="500" data-aos-once="true">
+        <div class="w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center text-2xl font-bold text-primary"><span data-i18n="intro-initial">邵</span></div>
+        <div>
+          <div class="font-sans font-bold text-2xl text-neutral-800 dark:text-neutral-100"><span data-i18n="intro-name">邵将</span></div>
+          <div class="text-sm text-neutral-500 dark:text-neutral-400"><span data-i18n="intro-subtitle">视觉设计师 · 8年经验</span></div>
+        </div>
+      </div>
+
+      <!-- Summary -->
+      <p class="text-base leading-relaxed text-neutral-700 dark:text-neutral-300 mb-4" data-aos="fade-up-xs" data-aos-delay="200" data-aos-duration="500" data-aos-once="true" data-i18n="intro-bio">
+        凭借丰富的视觉设计经验，将美学思维融入直播场景与新媒体内容，形成独特的视觉表达。具备出色的创新与独立执行能力，善于总结经验、迭代方法，高效配合团队完成目标。熟练掌握 PS、AI 等专业设计工具，为创意落地提供坚实保障。
+      </p>
+      <p class="text-base leading-relaxed text-neutral-700 dark:text-neutral-300 mb-4" data-aos="fade-up-xs" data-aos-delay="300" data-aos-duration="500" data-aos-once="true" data-i18n="intro-summary-2">
+        在职期间，全面负责抖音、美团、小红书等平台的直播场景设计，深度参与直播间搭建、设备调试及美陈执行，从视觉设计到现场落地全流程跟进，积累了丰富实战经验，对直播与新媒体行业充满热情。
+      </p>
+      <p class="text-base leading-relaxed text-neutral-700 dark:text-neutral-300 mb-8" data-aos="fade-up-xs" data-aos-delay="400" data-aos-duration="500" data-aos-once="true" data-i18n="intro-summary-3">
+        性格开朗、善于沟通，工作认真负责，具备良好的服务意识与团队协作精神，抗压能力强，能在快节奏环境中持续输出高质量成果。
+      </p>
+
+      <!-- Contact Info -->
+      <div class="flex flex-wrap items-center gap-x-6 gap-y-2 mb-12" data-aos="fade-up-xs" data-aos-delay="500" data-aos-duration="500" data-aos-once="true">
+        <div class="flex items-center gap-2 text-neutral-700 dark:text-neutral-300">
+          <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 0 1 2-2h3.28a1 1 0 0 1 .948.684l1.498 4.493a1 1 0 0 1-.502 1.21l-2.257 1.13a11.042 11.042 0 0 0 5.516 5.516l1.13-2.257a1 1 0 0 1 1.21-.502l4.493 1.498a1 1 0 0 1 .684.949V19a2 2 0 0 1-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg>
+          <span class="text-sm">17623173199</span>
+        </div>
+        <div class="flex items-center gap-2 text-neutral-700 dark:text-neutral-300">
+          <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 0 0 2.22 0L21 8M5 19h14a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2z" /></svg>
+          <span class="text-sm">17623173199@163.com</span>
+        </div>
+        <div class="flex items-center gap-2 text-neutral-700 dark:text-neutral-300">
+          <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 0 0 2.22 0L21 8M5 19h14a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2z" /></svg>
+          <span class="text-sm">shaojiang3199@gmail.com</span>
+        </div>
+        <div class="flex items-center gap-2 text-neutral-700 dark:text-neutral-300">
+          <svg class="w-4 h-4 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M8.691 2.188C3.891 2.188 0 5.476 0 9.53c0 2.212 1.17 4.203 3.002 5.55a.59.59 0 0 1 .213.665l-.39 1.48c-.019.07-.048.141-.048.213 0 .163.13.295.29.295a.326.326 0 0 0 .167-.054l1.903-1.114a.864.864 0 0 1 .717-.098 10.16 10.16 0 0 0 2.837.403c.276 0 .543-.027.811-.05-.857-2.578.157-4.972 1.932-6.446 1.703-1.415 3.882-1.98 5.853-1.838-.576-3.583-4.196-6.348-8.596-6.348zM5.785 5.991c.642 0 1.162.529 1.162 1.18a1.17 1.17 0 0 1-1.162 1.178A1.17 1.17 0 0 1 4.623 7.17c0-.651.52-1.18 1.162-1.18zm5.813 0c.642 0 1.162.529 1.162 1.18a1.17 1.17 0 0 1-1.162 1.178 1.17 1.17 0 0 1-1.162-1.178c0-.651.52-1.18 1.162-1.18zm5.34 2.867c-1.797-.052-3.746.512-5.28 1.786-1.72 1.428-2.687 3.72-1.78 6.22.942 2.453 3.666 4.229 6.884 4.229.826 0 1.622-.12 2.361-.336a.722.722 0 0 1 .598.082l1.584.926a.272.272 0 0 0 .14.047c.134 0 .24-.111.24-.247 0-.06-.023-.12-.038-.177l-.327-1.233a.582.582 0 0 1-.023-.156.49.49 0 0 1 .201-.398C23.024 18.48 24 16.82 24 14.98c0-3.21-2.931-5.837-6.656-6.088V8.89c-.135-.01-.27-.027-.407-.03zm-2.53 3.274c.535 0 .969.44.969.982a.976.976 0 0 1-.969.983.976.976 0 0 1-.969-.983c0-.542.434-.982.97-.982zm4.844 0c.535 0 .969.44.969.982a.976.976 0 0 1-.969.983.976.976 0 0 1-.969-.983c0-.542.434-.982.969-.982z"/></svg>
+          <span class="text-sm">SJ664487637</span>
+        </div>
+      </div>
+
+      <!-- Expertise -->
+      <section>
+        <h2 class="text-2xl font-sans font-bold text-neutral-800 dark:text-neutral-200 mb-6" data-aos="fade-up-xs" data-aos-duration="500" data-aos-once="true" data-i18n="intro-expertise">专业能力</h2>
+        <div class="flex flex-wrap gap-3 mb-10" data-aos="fade-up-xs" data-aos-delay="100" data-aos-duration="600" data-aos-once="true">
+          <div class="flex items-center gap-2 px-5 py-3 rounded-xl bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-200 text-sm font-medium border border-neutral-200 dark:border-neutral-700">
+            <Monitor size={18} /> <span data-i18n="intro-skill-live">直播场景设计</span>
+          </div>
+          <div class="flex items-center gap-2 px-5 py-3 rounded-xl bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-200 text-sm font-medium border border-neutral-200 dark:border-neutral-700">
+            <Palette size={18} /> <span data-i18n="intro-skill-ecom">电商视觉设计</span>
+          </div>
+          <div class="flex items-center gap-2 px-5 py-3 rounded-xl bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-200 text-sm font-medium border border-neutral-200 dark:border-neutral-700">
+            <Zap size={18} /> <span data-i18n="intro-skill-brand">品牌视觉规范</span>
+          </div>
+          <div class="flex items-center gap-2 px-5 py-3 rounded-xl bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-200 text-sm font-medium border border-neutral-200 dark:border-neutral-700">
+            <Smartphone size={18} /> <span data-i18n="intro-skill-media">新媒体视觉</span>
+          </div>
+          <div class="flex items-center gap-2 px-5 py-3 rounded-xl bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-200 text-sm font-medium border border-neutral-200 dark:border-neutral-700">
+            <Globe size={18} /> <span data-i18n="intro-skill-team">团队管理</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Work Experience -->
+      <section>
+        <h2 class="text-2xl font-sans font-bold text-neutral-800 dark:text-neutral-200 mb-6" data-aos="fade-up-xs" data-aos-duration="500" data-aos-once="true" data-i18n="intro-experience">工作经历</h2>
+        {experiences.map((exp, i) => (
+          <div class="mb-10 border-l border-dashed border-gray-200 dark:border-neutral-500 pl-6 relative" data-aos="fade-up-xs" data-aos-delay={200 + (i * 100)} data-aos-duration="500" data-aos-once="true">
+            <div class="absolute left-0 top-1 w-3 h-3 rounded-full bg-primary -translate-x-1/2"></div>
+            <div class="flex flex-wrap items-baseline gap-2 mb-1">
+              <h3 class="text-lg font-semibold text-neutral-800 dark:text-neutral-100"><span data-i18n={exp._cKey}>{exp.company}</span></h3>
+              <span class="text-sm text-neutral-400" data-i18n={exp._pKey}>{exp.period}</span>
+            </div>
+            <div class="text-sm text-primary dark:text-primary-light font-medium mb-3"><span data-i18n={exp._rKey}>{exp.role}</span> · <span data-i18n={exp._dKey}>{exp.dept}</span></div>
+            <ul class="space-y-2">
+              {exp.highlights.map((h, j) => (
+                <li class="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed flex gap-2">
+                  <span class="text-primary/60 mt-1 flex-shrink-0">▸</span>
+                  <span data-i18n={exp._hlKeys[j]}>{h}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </section>
+
+      <!-- Tools -->
+      <section>
+        <h2 class="text-2xl font-sans font-bold text-neutral-800 dark:text-neutral-200 mb-6" data-aos="fade-up-xs" data-aos-duration="500" data-aos-once="true" data-i18n="intro-tools">工具技能</h2>
+        <div class="flex flex-wrap gap-3 mb-12" data-aos="fade-up-xs" data-aos-delay="100" data-aos-duration="600" data-aos-once="true">
+          {[
+            "Adobe Photoshop", "Adobe Illustrator", "OBS Studio",
+            "Canva", "Midjourney", "Stable Diffusion",
+            "ClawX", "ChatGPT", "抖音直播伴侣", "剪映"
+          ].map(tool => (
+            <span class="px-4 py-2 rounded-lg bg-neutral-100 dark:bg-neutral-800 text-sm text-neutral-700 dark:text-neutral-300 border border-neutral-200 dark:border-neutral-700">{tool}</span>
+          ))}
+        </div>
+      </section>
+
+      <!-- Education -->
+      <section class="mb-16">
+        <h2 class="text-2xl font-sans font-bold text-neutral-800 dark:text-neutral-200 mb-4" data-aos="fade-up-xs" data-aos-duration="500" data-aos-once="true" data-i18n="intro-education">教育经历</h2>
+        <div class="border-l border-dashed border-gray-200 dark:border-neutral-500 pl-6 relative" data-aos="fade-up-xs" data-aos-delay="100" data-aos-duration="500" data-aos-once="true">
+          <div class="absolute left-0 top-1 w-3 h-3 rounded-full bg-primary -translate-x-1/2"></div>
+          <h3 class="text-lg font-semibold text-neutral-800 dark:text-neutral-100"><span data-i18n="intro-school">重庆传媒职业学院</span></h3>
+          <div class="text-sm text-neutral-500 dark:text-neutral-400 mt-1"><span data-i18n="intro-major">大专 · 数字媒体艺术</span></div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+</Layout>
