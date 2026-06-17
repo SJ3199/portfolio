@@ -1,4 +1,4 @@
-﻿[
+[
   {
     "id": "1",
     "image": "/portfolio/images/live-stream/1.jpg",
@@ -240,26 +240,6 @@
     "details": ""
   },
   {
-    "id": "001",
-    "image": "/portfolio/images/posters/001.jpg",
-    "title": "001",
-    "description": "",
-    "category": "posters",
-    "categoryName": "海报设计",
-    "categoryNameEn": "Posters",
-    "details": ""
-  },
-  {
-    "id": "01",
-    "image": "/portfolio/images/posters/01.jpg",
-    "title": "01",
-    "description": "",
-    "category": "posters",
-    "categoryName": "海报设计",
-    "categoryNameEn": "Posters",
-    "details": ""
-  },
-  {
     "id": "1",
     "image": "/portfolio/images/posters/1.jpg",
     "title": "1",
@@ -321,7 +301,7 @@
   },
   {
     "id": "7",
-    "image": "/portfolio/images/posters/7.jpg",
+    "image": "/portfolio/images/posters/7.png",
     "title": "7",
     "description": "",
     "category": "posters",
@@ -371,7 +351,7 @@
   },
   {
     "id": "12",
-    "image": "/portfolio/images/posters/12.png",
+    "image": "/portfolio/images/posters/12.jpg",
     "title": "12",
     "description": "",
     "category": "posters",
@@ -450,126 +430,6 @@
     "details": ""
   },
   {
-    "id": "20 (1)",
-    "image": "/portfolio/images/posters/20 (1).jpg",
-    "title": "20 (1)",
-    "description": "",
-    "category": "posters",
-    "categoryName": "海报设计",
-    "categoryNameEn": "Posters",
-    "details": ""
-  },
-  {
-    "id": "20 (1)",
-    "image": "/portfolio/images/posters/20 (1).png",
-    "title": "20 (1)",
-    "description": "",
-    "category": "posters",
-    "categoryName": "海报设计",
-    "categoryNameEn": "Posters",
-    "details": ""
-  },
-  {
-    "id": "20 (2)",
-    "image": "/portfolio/images/posters/20 (2).jpg",
-    "title": "20 (2)",
-    "description": "",
-    "category": "posters",
-    "categoryName": "海报设计",
-    "categoryNameEn": "Posters",
-    "details": ""
-  },
-  {
-    "id": "20 (2)",
-    "image": "/portfolio/images/posters/20 (2).png",
-    "title": "20 (2)",
-    "description": "",
-    "category": "posters",
-    "categoryName": "海报设计",
-    "categoryNameEn": "Posters",
-    "details": ""
-  },
-  {
-    "id": "20 (3)",
-    "image": "/portfolio/images/posters/20 (3).jpg",
-    "title": "20 (3)",
-    "description": "",
-    "category": "posters",
-    "categoryName": "海报设计",
-    "categoryNameEn": "Posters",
-    "details": ""
-  },
-  {
-    "id": "20 (3)",
-    "image": "/portfolio/images/posters/20 (3).png",
-    "title": "20 (3)",
-    "description": "",
-    "category": "posters",
-    "categoryName": "海报设计",
-    "categoryNameEn": "Posters",
-    "details": ""
-  },
-  {
-    "id": "20 (4)",
-    "image": "/portfolio/images/posters/20 (4).jpg",
-    "title": "20 (4)",
-    "description": "",
-    "category": "posters",
-    "categoryName": "海报设计",
-    "categoryNameEn": "Posters",
-    "details": ""
-  },
-  {
-    "id": "20 (4)",
-    "image": "/portfolio/images/posters/20 (4).png",
-    "title": "20 (4)",
-    "description": "",
-    "category": "posters",
-    "categoryName": "海报设计",
-    "categoryNameEn": "Posters",
-    "details": ""
-  },
-  {
-    "id": "20 (5)",
-    "image": "/portfolio/images/posters/20 (5).jpg",
-    "title": "20 (5)",
-    "description": "",
-    "category": "posters",
-    "categoryName": "海报设计",
-    "categoryNameEn": "Posters",
-    "details": ""
-  },
-  {
-    "id": "20 (6)",
-    "image": "/portfolio/images/posters/20 (6).jpg",
-    "title": "20 (6)",
-    "description": "",
-    "category": "posters",
-    "categoryName": "海报设计",
-    "categoryNameEn": "Posters",
-    "details": ""
-  },
-  {
-    "id": "20 (7)",
-    "image": "/portfolio/images/posters/20 (7).jpg",
-    "title": "20 (7)",
-    "description": "",
-    "category": "posters",
-    "categoryName": "海报设计",
-    "categoryNameEn": "Posters",
-    "details": ""
-  },
-  {
-    "id": "20 (8)",
-    "image": "/portfolio/images/posters/20 (8).jpg",
-    "title": "20 (8)",
-    "description": "",
-    "category": "posters",
-    "categoryName": "海报设计",
-    "categoryNameEn": "Posters",
-    "details": ""
-  },
-  {
     "id": "20",
     "image": "/portfolio/images/posters/20.jpg",
     "title": "20",
@@ -590,9 +450,9 @@
     "details": ""
   },
   {
-    "id": "50 (1)",
-    "image": "/portfolio/images/posters/50 (1).jpg",
-    "title": "50 (1)",
+    "id": "22",
+    "image": "/portfolio/images/posters/22.jpg",
+    "title": "22",
     "description": "",
     "category": "posters",
     "categoryName": "海报设计",
@@ -600,9 +460,9 @@
     "details": ""
   },
   {
-    "id": "50 (1)",
-    "image": "/portfolio/images/posters/50 (1).png",
-    "title": "50 (1)",
+    "id": "23",
+    "image": "/portfolio/images/posters/23.jpg",
+    "title": "23",
     "description": "",
     "category": "posters",
     "categoryName": "海报设计",
@@ -610,9 +470,9 @@
     "details": ""
   },
   {
-    "id": "50 (2)",
-    "image": "/portfolio/images/posters/50 (2).jpg",
-    "title": "50 (2)",
+    "id": "24",
+    "image": "/portfolio/images/posters/24.jpg",
+    "title": "24",
     "description": "",
     "category": "posters",
     "categoryName": "海报设计",
@@ -620,9 +480,9 @@
     "details": ""
   },
   {
-    "id": "50 (2)",
-    "image": "/portfolio/images/posters/50 (2).png",
-    "title": "50 (2)",
+    "id": "25",
+    "image": "/portfolio/images/posters/25.jpg",
+    "title": "25",
     "description": "",
     "category": "posters",
     "categoryName": "海报设计",
@@ -630,9 +490,9 @@
     "details": ""
   },
   {
-    "id": "50 (3)",
-    "image": "/portfolio/images/posters/50 (3).jpg",
-    "title": "50 (3)",
+    "id": "26",
+    "image": "/portfolio/images/posters/26.jpg",
+    "title": "26",
     "description": "",
     "category": "posters",
     "categoryName": "海报设计",
@@ -640,9 +500,9 @@
     "details": ""
   },
   {
-    "id": "50 (3)",
-    "image": "/portfolio/images/posters/50 (3).png",
-    "title": "50 (3)",
+    "id": "27",
+    "image": "/portfolio/images/posters/27.png",
+    "title": "27",
     "description": "",
     "category": "posters",
     "categoryName": "海报设计",
@@ -650,9 +510,9 @@
     "details": ""
   },
   {
-    "id": "50 (4)",
-    "image": "/portfolio/images/posters/50 (4).jpg",
-    "title": "50 (4)",
+    "id": "28",
+    "image": "/portfolio/images/posters/28.jpg",
+    "title": "28",
     "description": "",
     "category": "posters",
     "categoryName": "海报设计",
@@ -660,9 +520,9 @@
     "details": ""
   },
   {
-    "id": "50 (4)",
-    "image": "/portfolio/images/posters/50 (4).png",
-    "title": "50 (4)",
+    "id": "29",
+    "image": "/portfolio/images/posters/29.png",
+    "title": "29",
     "description": "",
     "category": "posters",
     "categoryName": "海报设计",
@@ -670,9 +530,9 @@
     "details": ""
   },
   {
-    "id": "50 (5)",
-    "image": "/portfolio/images/posters/50 (5).jpg",
-    "title": "50 (5)",
+    "id": "30",
+    "image": "/portfolio/images/posters/30.jpg",
+    "title": "30",
     "description": "",
     "category": "posters",
     "categoryName": "海报设计",
@@ -680,9 +540,9 @@
     "details": ""
   },
   {
-    "id": "50 (6)",
-    "image": "/portfolio/images/posters/50 (6).jpg",
-    "title": "50 (6)",
+    "id": "31",
+    "image": "/portfolio/images/posters/31.png",
+    "title": "31",
     "description": "",
     "category": "posters",
     "categoryName": "海报设计",
@@ -690,9 +550,9 @@
     "details": ""
   },
   {
-    "id": "50 (7)",
-    "image": "/portfolio/images/posters/50 (7).jpg",
-    "title": "50 (7)",
+    "id": "32",
+    "image": "/portfolio/images/posters/32.jpg",
+    "title": "32",
     "description": "",
     "category": "posters",
     "categoryName": "海报设计",
@@ -700,9 +560,49 @@
     "details": ""
   },
   {
-    "id": "50 (8)",
-    "image": "/portfolio/images/posters/50 (8).jpg",
-    "title": "50 (8)",
+    "id": "33",
+    "image": "/portfolio/images/posters/33.jpg",
+    "title": "33",
+    "description": "",
+    "category": "posters",
+    "categoryName": "海报设计",
+    "categoryNameEn": "Posters",
+    "details": ""
+  },
+  {
+    "id": "34",
+    "image": "/portfolio/images/posters/34.png",
+    "title": "34",
+    "description": "",
+    "category": "posters",
+    "categoryName": "海报设计",
+    "categoryNameEn": "Posters",
+    "details": ""
+  },
+  {
+    "id": "35",
+    "image": "/portfolio/images/posters/35.jpg",
+    "title": "35",
+    "description": "",
+    "category": "posters",
+    "categoryName": "海报设计",
+    "categoryNameEn": "Posters",
+    "details": ""
+  },
+  {
+    "id": "36",
+    "image": "/portfolio/images/posters/36.jpg",
+    "title": "36",
+    "description": "",
+    "category": "posters",
+    "categoryName": "海报设计",
+    "categoryNameEn": "Posters",
+    "details": ""
+  },
+  {
+    "id": "37",
+    "image": "/portfolio/images/posters/37.jpg",
+    "title": "37",
     "description": "",
     "category": "posters",
     "categoryName": "海报设计",
@@ -1202,7 +1102,7 @@
   {
     "id": "1lavaza店铺-(1)",
     "image": "/portfolio/images/douyin-store/1lavaza店铺-(1).jpg",
-    "title": "1lavaza店铺 (1)",
+    "title": "1lavaza店铺-(1)",
     "description": "",
     "category": "douyin-store",
     "categoryName": "抖音店铺",
@@ -1222,7 +1122,7 @@
   {
     "id": "3lavaza店铺-(2)",
     "image": "/portfolio/images/douyin-store/3lavaza店铺-(2).jpg",
-    "title": "3lavaza店铺 (2)",
+    "title": "3lavaza店铺-(2)",
     "description": "",
     "category": "douyin-store",
     "categoryName": "抖音店铺",
@@ -1232,7 +1132,7 @@
   {
     "id": "4lavaza店铺-(3)",
     "image": "/portfolio/images/douyin-store/4lavaza店铺-(3).jpg",
-    "title": "4lavaza店铺 (3)",
+    "title": "4lavaza店铺-(3)",
     "description": "",
     "category": "douyin-store",
     "categoryName": "抖音店铺",
@@ -1242,7 +1142,7 @@
   {
     "id": "5lavaza店铺-(4)",
     "image": "/portfolio/images/douyin-store/5lavaza店铺-(4).jpg",
-    "title": "5lavaza店铺 (4)",
+    "title": "5lavaza店铺-(4)",
     "description": "",
     "category": "douyin-store",
     "categoryName": "抖音店铺",
@@ -1252,7 +1152,7 @@
   {
     "id": "6lavaza店铺-(5)",
     "image": "/portfolio/images/douyin-store/6lavaza店铺-(5).jpg",
-    "title": "6lavaza店铺 (5)",
+    "title": "6lavaza店铺-(5)",
     "description": "",
     "category": "douyin-store",
     "categoryName": "抖音店铺",

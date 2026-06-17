@@ -18,19 +18,18 @@ const firstActiveCat = categories.find(cat => galleryItems.some(item => item.cat
 const brandItems = galleryItems.filter(item => item.category === 'brand-design');
 const otherItems = galleryItems.filter(item => item.category !== 'brand-design');
 
-// Reorder for CSS columns masonry: visual row-major (1 2 3 / 4 5 6) requires column-major DOM.
 // CSS columns fills top→bottom per column, so DOM [0,3,6,1,4,7,2,5,8] → visual [0,1,2 / 3,4,5 / 6,7,8]
-// Keep originalIndex so data-index stays correct for detail modal lookups.
-function reorderForColumns(items, cols: number) {
+function reorderForColumns(items, cols) {
   const rows = Math.ceil(items.length / cols);
+  const totalSlots = rows * cols;
   const pairs = items.map((item, i) => ({ item, originalIndex: i }));
-  const result = new Array(items.length);
-  for (let i = 0; i < items.length; i++) {
+  const result = new Array(totalSlots);
+  for (let i = 0; i < pairs.length; i++) {
     const row = Math.floor(i / cols);
     const col = i % cols;
     result[col * rows + row] = pairs[i];
   }
-  return result;
+  return result.filter(p => p !== undefined);
 }
 const orderedItems = reorderForColumns(otherItems, 3);
 ---
@@ -55,8 +54,7 @@ const orderedItems = reorderForColumns(otherItems, 3);
       </div>
     </div>
 
-    <!-- Gallery Grid: Pinterest-style CSS columns masonry -->
-    <!-- CSS columns fills left→right naturally, no JS reorder needed -->
+    <!-- Gallery Grid: CSS columns masonry (handles varying heights) -->
     <div
       class="gallery-grid"
       id="galleryGrid"
@@ -66,6 +64,7 @@ const orderedItems = reorderForColumns(otherItems, 3);
           class="gallery-item gallery-grid-item group cursor-pointer"
           data-category={item.category}
           data-index={originalIndex}
+          style={`animation-delay: ${(originalIndex % 24) * 0.04}s`}
         >
           <div class={`relative overflow-hidden rounded-3xl transition-all duration-300${item.image.endsWith('.png') ? '' : ' border border-primary/10 dark:border-primary/20 bg-neutral-100 dark:bg-neutral-800'}`}>
               <img
@@ -168,7 +167,7 @@ const orderedItems = reorderForColumns(otherItems, 3);
   html.dark .filter-tag:hover { background-color: rgba(243, 244, 247, 0.08); }
   html.dark .filter-tag.active { background: #f4f3f0; color: #19191b; font-weight: 500; }
 
-  /* Pinterest-style masonry via CSS columns */
+  /* CSS columns masonry — handles varying heights naturally */
   .gallery-grid {
     column-count: 1;
     column-gap: 1rem;
@@ -179,9 +178,6 @@ const orderedItems = reorderForColumns(otherItems, 3);
   @media (min-width: 1024px) {
     .gallery-grid { column-count: 3; column-gap: 1.5rem; }
   }
-  .gallery-item { animation: fadeInUp 0.5s ease forwards; opacity: 0; }
-  /* Brand section items: always fully visible, no fade-in */
-  .brand-section .gallery-item { animation: none; opacity: 1; }
   .gallery-grid-item {
     break-inside: avoid;
     margin-bottom: 1rem;
@@ -189,6 +185,9 @@ const orderedItems = reorderForColumns(otherItems, 3);
   @media (min-width: 640px) {
     .gallery-grid-item { margin-bottom: 1.5rem; }
   }
+  .gallery-item { animation: fadeInUp 0.5s ease forwards; opacity: 0; }
+  /* Brand section items: always fully visible, no fade-in */
+  .brand-section .gallery-item { animation: none; opacity: 1; }
   @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
   #detailModal.show { display: flex; }
@@ -222,7 +221,7 @@ const orderedItems = reorderForColumns(otherItems, 3);
     const brandSection = document.getElementById('brandSection');
     const emptyState = document.getElementById('galleryEmpty');
 
-    // CSS columns fills left→right naturally, no JS reorder needed.
+    // Grid items are in natural DOM order (1,2,3 / 4,5,6).
     // Brand section only visible when brand-design tab is selected.
 
     function applyFilter(filter) {
@@ -257,7 +256,6 @@ const orderedItems = reorderForColumns(otherItems, 3);
       gridItems.forEach((item, i) => {
         if (item.dataset.category === filter) {
           item.style.display = '';
-          item.style.animationDelay = `${count * 0.02}s`;
           count++;
         } else {
           item.style.display = 'none';
