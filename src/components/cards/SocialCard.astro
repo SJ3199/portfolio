@@ -12,23 +12,19 @@ const filteredSocial = displaySocialIds.length > 0
     {filteredSocial.map((item, index) => (
       <div class="social-item-outer" style={`--i: ${index}; --t: ${filteredSocial.length};`}>
         {item.name === "WeChat" ? (
-          <>
-            <button class="social-item qr-trigger" data-popup="wechat-qr-popup" data-copy="SJ664487637" data-label="΢�ź�">
-              <img src={item.image} alt={item.name} class="social-image" />
-            </button>
-            <div id="wechat-qr-popup" class="qr-card" popover>
+          <div class="social-item qr-trigger" data-copy="SJ664487637" data-label="微信号">
+            <img src={item.image} alt={item.name} class="social-image" />
+            <div class="qr-popup">
               <img src="/assets/social/wechat-qr.png" alt="微信二维码" class="qr-img" />
             </div>
-          </>
-        ) : item.name === "����" ? (
-          <>
-            <button class="social-item qr-trigger" data-popup="douyin-qr-popup" data-copy="96105575" data-label="����ID">
-              <img src={item.image} alt={item.name} class="social-image" />
-            </button>
-            <div id="douyin-qr-popup" class="qr-card" popover>
+          </div>
+        ) : item.name === "抖音" ? (
+          <div class="social-item qr-trigger" data-copy="96105575" data-label="抖音ID">
+            <img src={item.image} alt={item.name} class="social-image" />
+            <div class="qr-popup">
               <img src="/assets/social/douyin-qr.png" alt="抖音二维码" class="qr-img" />
             </div>
-          </>
+          </div>
         ) : (
           <a href={item.url} target="_blank" rel="noopener noreferrer" class="social-item">
             <img src={item.image} alt={item.name} class="social-image" />
@@ -37,7 +33,7 @@ const filteredSocial = displaySocialIds.length > 0
       </div>
     ))}
   </div>
-  <!-- Toast for mobile copy -->
+  <!-- Toast for copy feedback -->
   <div id="copy-toast" class="copy-toast"></div>
 </div>
 
@@ -67,7 +63,7 @@ const filteredSocial = displaySocialIds.length > 0
     height: 56px;
     display: block;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    overflow: hidden;
+    overflow: visible;
     border: none;
     padding: 0;
     background: none;
@@ -84,23 +80,55 @@ const filteredSocial = displaySocialIds.length > 0
     display: block;
   }
 
-  .qr-card {
-    margin: 0;
-    padding: 0;
-    background: transparent;
+  /* QR popup: shown BELOW on hover (desktop only) */
+  .qr-popup {
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.25s ease, visibility 0.25s ease;
+    z-index: 1000;
+    background: #fff;
+    border-radius: 12px;
     border: none;
-    border-radius: 1rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+    padding: 8px;
+    line-height: 0;
   }
-  .qr-card::backdrop {
-    background: transparent;
+  /* Arrow pointing up */
+  .qr-popup::before {
+    content: '';
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 8px solid transparent;
+    border-bottom-color: #fff;
+  }
+  /* Desktop: show on hover */
+  @media (hover: hover) and (pointer: fine) {
+    .qr-trigger:hover .qr-popup {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+  }
+  /* Mobile: never show QR popup */
+  @media (hover: none), (pointer: coarse) {
+    .qr-popup {
+      display: none;
+    }
   }
   .qr-img {
-    max-width: 220px;
-    max-height: 220px;
+    max-width: 200px;
+    max-height: 200px;
     width: auto;
     height: auto;
     display: block;
-    border-radius: 0.5rem;
+    border-radius: 8px;
   }
 
   /* Toast styles */
@@ -128,70 +156,31 @@ const filteredSocial = displaySocialIds.length > 0
 </style>
 
 <script>
-  const isMobile = 'ontouchstart' in window || window.innerWidth <= 640;
-
   document.querySelectorAll('.qr-trigger').forEach((trigger) => {
     const el = trigger as HTMLElement;
-    const popupId = el.dataset.popup;
-    const copyId = el.dataset.copy;
-    const label = el.dataset.label;
+    const copyId = el.dataset.copy || '';
+    const label = el.dataset.label || '';
 
-    if (isMobile && copyId) {
-      // Mobile: copy to clipboard + toast
-      el.addEventListener('click', async (e) => {
-        e.preventDefault();
-        try {
-          await navigator.clipboard.writeText(copyId);
-        } catch {
-          // Fallback for older browsers
-          const ta = document.createElement('textarea');
-          ta.value = copyId;
-          ta.style.position = 'fixed';
-          ta.style.left = '-9999px';
-          document.body.appendChild(ta);
-          ta.select();
-          document.execCommand('copy');
-          document.body.removeChild(ta);
-        }
-        const toast = document.getElementById('copy-toast');
-        if (toast) {
-          toast.textContent = '�Ѹ���' + label + ' ' + copyId;
-          toast.classList.add('show');
-          setTimeout(() => toast.classList.remove('show'), 2000);
-        }
-      });
-      return; // Skip desktop popover setup
-    }
-
-    if (!popupId) return;
-    const popup = document.getElementById(popupId);
-    if (!popup) return;
-
-    function positionPopup() {
-      const rect = el.getBoundingClientRect();
-      (popup as HTMLElement).style.left = rect.left + 'px';
-      (popup as HTMLElement).style.top = (rect.bottom + 12) + 'px';
-    }
-    el.addEventListener('click', () => {
-      if (popup.matches(':popover-open')) {
-        positionPopup();
+    // Click → copy to clipboard (both desktop & mobile)
+    el.addEventListener('click', async (e) => {
+      e.preventDefault();
+      try {
+        await navigator.clipboard.writeText(copyId);
+      } catch {
+        const ta = document.createElement('textarea');
+        ta.value = copyId;
+        ta.style.position = 'fixed';
+        ta.style.left = '-9999px';
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
       }
-    });
-    el.addEventListener('mouseenter', () => {
-      if (!popup.matches(':popover-open')) popup.showPopover();
-      positionPopup();
-    });
-    el.addEventListener('mouseleave', () => {
-      popup.hidePopover();
-    });
-    popup.addEventListener('mouseenter', () => {});
-    popup.addEventListener('mouseleave', () => {
-      popup.hidePopover();
-    });
-    document.addEventListener('click', (e) => {
-      const t = e.target as HTMLElement;
-      if (!t.closest(`[data-popup="${popupId}"]`) && !t.closest(`#${popupId}`)) {
-        popup.hidePopover();
+      const toast = document.getElementById('copy-toast');
+      if (toast) {
+        toast.textContent = '已复制' + label + ': ' + copyId;
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 2000);
       }
     });
   });
