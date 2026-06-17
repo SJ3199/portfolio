@@ -14,7 +14,7 @@ const {
   description,
   keywords = "",
   url = siteConfig.url, //
-  ogImage = "/portfolio/og.jpg",
+  ogImage = "/og.jpg",
   twitterHandle = siteConfig.social.twitterName || '',
 } = Astro.props;
 ---
@@ -22,7 +22,7 @@ const {
 <!-- Meta Tags -->
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link rel="icon" type="image/svg+xml" href="/portfolio/favicon.png" />
+<link rel="icon" type="image/svg+xml" href="/favicon.png" />
 <title>{title}</title>
 <meta name="description" content={description} />
 <meta name="keywords" content={keywords} />

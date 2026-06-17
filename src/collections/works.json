@@ -1,10 +1,10 @@
-﻿[
+[
 	{
 		"name": "RicoOG",
 		"description": "OG Inspiration Library",
 		"tags": ["Open Graph", "Design", "Library"],
-		"image": "/portfolio/assets/works/ricoog.jpg",
-		"video": "/portfolio/assets/works/ricoog.mp4",
+		"image": "/assets/works/ricoog.jpg",
+		"video": "/assets/works/ricoog.mp4",
 		"url": "https://ricoog.com/",
 		"isShow": true
 	},
@@ -12,24 +12,24 @@
 		"name": "GradientsHub",
 		"description": "Gradient Resources & Tools",
 		"tags": ["Gradient","Resources","Tools"],
-		"image": "/portfolio/assets/works/gradientshub.jpg",
-		"video": "/portfolio/assets/works/gradientshub.mp4",
+		"image": "/assets/works/gradientshub.jpg",
+		"video": "/assets/works/gradientshub.mp4",
 		"url": "https://gradientshub.com"
 	},
 	{
 		"name": "Luon Models",
 		"description": "Agency Company Website",
 		"tags": ["Agency","Website"],
-		"image": "/portfolio/assets/works/luonmodels.jpg",
-		"video": "/portfolio/assets/works/luonmodels.mp4",
+		"image": "/assets/works/luonmodels.jpg",
+		"video": "/assets/works/luonmodels.mp4",
 		"url": "/work/luonmodels"
 	},
 	{
 		"name": "Ricoui",
 		"description": "Designer Portfolio",
 		"tags": ["Designer","Portfolio","Open Source"],
-		"image": "/portfolio/assets/works/ricoui.jpg",
-		"video": "/portfolio/assets/works/ricoui.mp4",
+		"image": "/assets/works/ricoui.jpg",
+		"video": "/assets/works/ricoui.mp4",
 		"url": "/work/ricoblog2024"
 
 	},
@@ -37,22 +37,22 @@
 		"name": "3D Valentines Assets",
 		"description": "Blender Design Resources & Assets",
 		"tags": ["3D","Resources","Assets"],
-		"image": "/portfolio/assets/works/3d-valentines.jpg",
-		"video": "/portfolio/assets/works/3d-valentines.mp4",
+		"image": "/assets/works/3d-valentines.jpg",
+		"video": "/assets/works/3d-valentines.mp4",
 		"url": "/work/3dvalentine"
 	},
 	{
 		"name": "UIUXDECK",
 		"description": "Design Resources & Tools",
 		"tags": ["Design","Resources","Tools"],
-		"image": "/portfolio/assets/works/uiuxdeck.jpg",
+		"image": "/assets/works/uiuxdeck.jpg",
 		"url": "http://uiuxdeck.com/"
 	},
 	{
 		"name": "Inspoweb",
 		"description": "Web Inspiration Library",
 		"tags": ["Inspiration","Web Collection"],
-		"image": "/portfolio/assets/works/inspoweb.jpg",
+		"image": "/assets/works/inspoweb.jpg",
 		"url": "https://inspoweb.com/"
 	}
 ]
