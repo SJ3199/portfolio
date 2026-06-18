@@ -93,7 +93,7 @@ const menusWithActive = menus.map(menu => ({
         </div>
 
         <!-- Menu Links -->
-        <div class="relative z-10 flex flex-row sm:flex-row items-center w-auto gap-1 sm:gap-0">
+        <div class="relative z-10 flex flex-row sm:flex-row items-center w-auto gap-2 sm:gap-0">
           {
             menusWithActive.map((menu) => {
               return (
@@ -104,7 +104,7 @@ const menusWithActive = menus.map(menu => ({
                   data-i18n-en={menu.nameEn}
                   data-i18n-zh-short={menu.nameZhShort}
                   data-i18n-en-short={menu.nameEnShort}
-                  class={`relative flex items-center justify-center w-auto px-1 py-0.5 sm:px-4 sm:py-2 md:px-5 font-medium tracking-wide text-center duration-200 ease-out rounded-lg sm:rounded-none text-neutral-700 dark:text-neutral-200 text-[11px] sm:text-[15px] hover:text-primary sm:hover:bg-transparent dark:hover:text-white dark:hover:bg-neutral-800/50 sm:dark:hover:bg-transparent active:scale-[0.98] sm:active:scale-100 transition-all${menu.active ? ' active text-primary dark:text-primary-light' : ''}`}
+                  class={`relative flex items-center justify-center w-auto px-1.5 py-0.5 sm:px-4 sm:py-2 md:px-5 font-medium tracking-wide text-center duration-200 ease-out rounded-lg sm:rounded-none text-neutral-700 dark:text-neutral-200 text-[13px] sm:text-[15px] hover:text-primary sm:hover:bg-transparent dark:hover:text-white dark:hover:bg-neutral-800/50 sm:dark:hover:bg-transparent active:scale-[0.98] sm:active:scale-100 transition-all${menu.active ? ' active text-primary dark:text-primary-light' : ''}`}
                 >
                   {menu.nameZh}
                 </a>
@@ -122,16 +122,16 @@ const menusWithActive = menus.map(menu => ({
       </div>
 
       <!-- Desktop Actions -->
-      <div class="relative flex items-center gap-0.5 ml-0.5 sm:gap-2 sm:ml-4 lg:ml-6">
+      <div class="relative flex items-center gap-0.5 ml-0.5 sm:gap-3 sm:ml-6 lg:ml-10">
         <!-- Contact Button (Desktop) -->
         <a
           href="/assets/邵将简历-Sam's Resume.pdf"
           download
           target="_self"
-          class="flex justify-center items-center gap-0.5 sm:gap-1 px-1.5 sm:px-5 py-0.5 sm:py-[12px] rounded-lg sm:rounded-xl bg-btn-primary dark:bg-btn-primary-dark border-[0] border-[rgba(138,127,255,0.2)] shadow-[0px_2px_3px_0_rgba(0,0,0,0.1)] max-w-60 transition duration-400 ease-in-out hover:bg-btn-primary-hover dark:hover:bg-btn-primary-dark-hover hover:translate-y-[-2px] hover:shadow-[0px_6px_9px_0_rgba(61,99,171,0.15)] dark:shadow-[0px_6px_9px_0_rgba(0,0,0,0.2)] md:flex mx-0 sm:mx-1"
+          class="flex justify-center items-center gap-0.5 sm:gap-1 px-2 sm:px-5 py-0.5 sm:py-[12px] rounded-lg sm:rounded-xl bg-btn-primary dark:bg-btn-primary-dark border-[0] border-[rgba(138,127,255,0.2)] shadow-[0px_2px_3px_0_rgba(0,0,0,0.1)] max-w-60 transition duration-400 ease-in-out hover:bg-btn-primary-hover dark:hover:bg-btn-primary-dark-hover hover:translate-y-[-2px] hover:shadow-[0px_6px_9px_0_rgba(61,99,171,0.15)] dark:shadow-[0px_6px_9px_0_rgba(0,0,0,0.2)] md:flex mx-0 sm:mx-1"
         >
-          <span class="flex gap-0.5 sm:gap-1.5 items-center justify-center text-[11px] sm:text-[15px] font-medium text-center text-neutral-50">
-            <span data-i18n="resume">����</span> <Download size={12} class="sm:w-[18px] sm:h-[18px]" />
+          <span class="flex gap-0.5 sm:gap-1.5 items-center justify-center text-[13px] sm:text-[15px] font-medium text-center text-neutral-50">
+            <span data-i18n="resume">����</span> <Download size={14} class="sm:w-[18px] sm:h-[18px]" />
           </span>
         </a>
 
