@@ -5,7 +5,7 @@ export const siteConfig = {
 	author: "Designer",
 	url: SITE_URL,
 	mail: "hello@example.com",
-	resume: "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/images/resume/",
+	resume: "https://pub-ea6cf7d0fc18449aa9cce3aee87abf18.r2.dev/images/resume.pdf",
 	utm: {
 		source: `${SITE_URL}`,
 		medium: "referral",
